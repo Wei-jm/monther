@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>母亲节快乐</title>
+<style>
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #fce4ec; /* 淡粉色背景 */
+  overflow: hidden; /* 隐藏超出屏幕的内容 */
+}
+
+.container {
+  text-align: center;
+}
+
+.heart {
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  display: inline-block;
+  position: relative;
+  transform: rotate(-45deg);
+  animation: heartbeat 1.5s infinite;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart:before {
+  top: -25px;
+  left: 0;
+}
+
+.heart:after {
+  left: 25px;
+  top: 0;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: rotate(-45deg) scale(1);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+}
+
+.text {
+  font-size: 2em;
+  color: #e91e63; /* 粉色文字 */
+  margin-top: 20px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 添加飘落的爱心 */
+.falling-heart {
+  position: absolute;
+  color: red;
+  font-size: 1.5em;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="heart"></div>
+    <div class="text">母亲节快乐!</div>
+  </div>
+
+  <script>
+    // 创建飘落的爱心
+    function createFallingHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('falling-heart');
+      heart.textContent = '❤️'; // 使用爱心符号
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 5 + 5 + 's'; // 随机速度
+      heart.style.opacity = Math.random(); // 随机透明度
+      document.body.appendChild(heart);
+
+      heart.addEventListener('animationiteration', () => {
+        heart.remove();
+        createFallingHeart(); // 动画结束后重新创建
+      });
+    }
+
+    // 创建多个飘落的爱心
+    for (let i = 0; i < 10; i++) {
+      createFallingHeart();
+    }
+  </script>
+</body>
+</html>
